@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GECO.Web", "GECO.Web\GECO.Web.csproj", "{9AD57D3E-811E-422C-BF5D-D08B0E2A4EE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GECO.Data", "GECO.Data\GECO.Data.csproj", "{DFB19248-58B8-4C0F-9D87-98BDBC54267C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GECO.Model", "GECO.Model\GECO.Model.csproj", "{790D6980-816D-41BE-94B8-94883E47656A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GECO.DomainClasses", "GECO.DomainClasses\GECO.DomainClasses.csproj", "{FE52565C-C741-4457-835D-FBEDDCA76961}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GECO.Repository", "GECO.Repository\GECO.Repository.csproj", "{2C3D20F2-36D0-48FC-98D1-CB15B6754670}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GECO.Test", "GECO.Test\GECO.Test.csproj", "{6039338F-185A-4999-A0F8-56CDBF9E9B3F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9AD57D3E-811E-422C-BF5D-D08B0E2A4EE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AD57D3E-811E-422C-BF5D-D08B0E2A4EE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AD57D3E-811E-422C-BF5D-D08B0E2A4EE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AD57D3E-811E-422C-BF5D-D08B0E2A4EE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFB19248-58B8-4C0F-9D87-98BDBC54267C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFB19248-58B8-4C0F-9D87-98BDBC54267C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFB19248-58B8-4C0F-9D87-98BDBC54267C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFB19248-58B8-4C0F-9D87-98BDBC54267C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{790D6980-816D-41BE-94B8-94883E47656A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{790D6980-816D-41BE-94B8-94883E47656A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{790D6980-816D-41BE-94B8-94883E47656A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{790D6980-816D-41BE-94B8-94883E47656A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE52565C-C741-4457-835D-FBEDDCA76961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE52565C-C741-4457-835D-FBEDDCA76961}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE52565C-C741-4457-835D-FBEDDCA76961}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE52565C-C741-4457-835D-FBEDDCA76961}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C3D20F2-36D0-48FC-98D1-CB15B6754670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C3D20F2-36D0-48FC-98D1-CB15B6754670}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C3D20F2-36D0-48FC-98D1-CB15B6754670}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C3D20F2-36D0-48FC-98D1-CB15B6754670}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6039338F-185A-4999-A0F8-56CDBF9E9B3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6039338F-185A-4999-A0F8-56CDBF9E9B3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6039338F-185A-4999-A0F8-56CDBF9E9B3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6039338F-185A-4999-A0F8-56CDBF9E9B3F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
