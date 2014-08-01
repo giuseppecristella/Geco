@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GecoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="GecoModelStoreContainer">
+    <EntitySet Name="Contents" EntityType="GecoModel.Store.Contents" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Contents">
+    <Key>
+      <PropertyRef Name="ContentId" />
+    </Key>
+    <Property Name="ContentId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AuthInfo_CreatedBy" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="AuthInfo_Created" Type="datetime" Nullable="false" />
+    <Property Name="AuthInfo_ModifiedBy" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="AuthInfo_Modified" Type="datetime" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="ShortDescription" Type="nvarchar" Nullable="true" MaxLength="300" />
+    <Property Name="LongDescription" Type="nvarchar" Nullable="true" MaxLength="500" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="GecoModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="GecoModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contents" EntityType="GecoModel.Content" />
+        </EntityContainer>
+        <EntityType Name="Content">
+          <Key>
+            <PropertyRef Name="ContentId" />
+          </Key>
+          <Property Name="ContentId" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="AuthInfo" Type="GecoModel.AuthInfo" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" />
+          <Property Name="ShortDescription" Type="String" Nullable="true" MaxLength="300" />
+          <Property Name="LongDescription" Type="String" Nullable="true" MaxLength="500" />
+          <Property Name="Text" Type="String" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="AuthInfo">
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Created" Nullable="false" />
+          <Property Type="String" Name="ModifiedBy" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Modified" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GecoModelStoreContainer" CdmEntityContainer="GecoModelContainer">
+    <EntitySetMapping Name="Contents">
+      <EntityTypeMapping TypeName="IsTypeOf(GecoModel.Content)">
+        <MappingFragment StoreEntitySet="Contents">
+          <ScalarProperty Name="ContentId" ColumnName="ContentId" />
+          <ComplexProperty Name="AuthInfo" TypeName="GecoModel.AuthInfo">
+            <ScalarProperty Name="CreatedBy" ColumnName="AuthInfo_CreatedBy" />
+            <ScalarProperty Name="Created" ColumnName="AuthInfo_Created" />
+            <ScalarProperty Name="ModifiedBy" ColumnName="AuthInfo_ModifiedBy" />
+            <ScalarProperty Name="Modified" ColumnName="AuthInfo_Modified" />
+          </ComplexProperty>
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+          <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
