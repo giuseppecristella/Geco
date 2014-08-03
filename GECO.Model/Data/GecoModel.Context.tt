@@ -54,7 +54,7 @@ using System.Linq;
 }
 #>
 
-<#=Accessibility.ForType(container)#> partial class <#=code.Escape(container)#> : DbContext
+<#=Accessibility.ForType(container)#> partial class <#=code.Escape(container)#> : DbContext, IDbContext
 {
     public <#=code.Escape(container)#>()
         : base("name=<#=container.Name#>")
@@ -84,6 +84,17 @@ foreach (var entitySet in container.BaseEntitySets.OfType<EntitySet>())
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
         throw new UnintentionalCodeFirstException();
+    }
+
+	public new IDbSet<T> Set<T>() where T : class
+    {
+      return base.Set<T>();
+    }
+
+    public override int SaveChanges()
+    {
+      this.ApplyStateChanges();
+      return base.SaveChanges();
     }
 
 <#

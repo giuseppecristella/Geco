@@ -9,36 +9,34 @@
 
 namespace GECO.Model.Data
 {
-  using System;
-  using System.Data.Entity;
-  using System.Data.Entity.Infrastructure;
-  using GECO.DomainClasses;
-
-  public partial class GecoModelContainer : DbContext, IDbContext
-  {
-    public GecoModelContainer()
-      : base("name=GecoModelContainer")
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    using GECO.DomainClasses;
+    
+    public partial class GecoModelContainer : DbContext, IDbContext
     {
+        public GecoModelContainer()
+            : base("name=GecoModelContainer")
+        {
+        }
+    
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
+    
+    	public new IDbSet<T> Set<T>() where T : class
+        {
+          return base.Set<T>();
+        }
+    
+        public override int SaveChanges()
+        {
+          this.ApplyStateChanges();
+          return base.SaveChanges();
+        }
+    
+        public virtual DbSet<Content> Contents { get; set; }
     }
-
-    protected override void OnModelCreating(DbModelBuilder modelBuilder)
-    {
-      throw new UnintentionalCodeFirstException();
-    }
-
-    public virtual DbSet<Content> Contents { get; set; }
-
-    // Generare dal tt i due metodi seguenti
-    public new IDbSet<T> Set<T>() where T : class
-    {
-      return base.Set<T>();
-    }
-
-    public override int SaveChanges()
-    {
-      this.ApplyStateChanges();
-      return base.SaveChanges();
-    }
-
-  }
 }
