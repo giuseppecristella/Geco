@@ -24,7 +24,7 @@ namespace Repository
 
       // e.g. container.RegisterType<ITestService, TestService>();    
       RegisterTypes(container);
-     
+
       return container;
     }
 

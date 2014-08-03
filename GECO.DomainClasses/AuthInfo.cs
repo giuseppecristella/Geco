@@ -11,7 +11,7 @@ namespace GECO.DomainClasses
 {
     using System;
     
-    public partial class AuthInfo
+    public partial class AuthInfo: Entity
     {
         public string CreatedBy { get; set; }
         public System.DateTime Created { get; set; }
