@@ -38,5 +38,9 @@ namespace GECO.Model.Data
         }
     
         public virtual DbSet<Content> Contents { get; set; }
+        public virtual DbSet<Video> VideoSet { get; set; }
+        public virtual DbSet<Album> Albums { get; set; }
+        public virtual DbSet<Photo> Photos { get; set; }
+        public virtual DbSet<Document> Documents { get; set; }
     }
 }

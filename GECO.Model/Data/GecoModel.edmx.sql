@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/28/2014 18:24:36
--- Generated from EDMX file: D:\Progetti\GeCo\GECO.Model\GECO.Model\Data\GecoModel.edmx
+-- Date Created: 08/06/2014 18:11:45
+-- Generated from EDMX file: D:\Progetti\GecoGit\GECO.Model\Data\GecoModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -22,6 +22,9 @@ GO
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[Contents]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Contents];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -37,7 +40,70 @@ CREATE TABLE [dbo].[Contents] (
     [Name] nvarchar(100)  NOT NULL,
     [ShortDescription] nvarchar(300)  NULL,
     [LongDescription] nvarchar(500)  NULL,
-    [Text] nvarchar(max)  NOT NULL
+    [Text] nvarchar(max)  NOT NULL,
+    [AlbumId] uniqueidentifier  NULL,
+    [VideoId] uniqueidentifier  NULL,
+    [MapUrl] nvarchar(100)  NULL
+);
+GO
+
+-- Creating table 'VideoSet'
+CREATE TABLE [dbo].[VideoSet] (
+    [Id] uniqueidentifier  NOT NULL,
+    [Url] nvarchar(150)  NULL,
+    [EmbeddedCode] nvarchar(500)  NULL
+);
+GO
+
+-- Creating table 'Albums'
+CREATE TABLE [dbo].[Albums] (
+    [Id] uniqueidentifier  NOT NULL,
+    [Name] nvarchar(100)  NOT NULL,
+    [AuthInfo_CreatedBy] nvarchar(50)  NOT NULL,
+    [AuthInfo_Created] datetime  NOT NULL,
+    [AuthInfo_ModifiedBy] nvarchar(50)  NOT NULL,
+    [AuthInfo_Modified] datetime  NOT NULL
+);
+GO
+
+-- Creating table 'Photos'
+CREATE TABLE [dbo].[Photos] (
+    [Id] uniqueidentifier  NOT NULL,
+    [Name] nvarchar(100)  NOT NULL,
+    [Path] nvarchar(300)  NOT NULL,
+    [Description] nvarchar(300)  NOT NULL,
+    [AlbumId] uniqueidentifier  NULL
+);
+GO
+
+-- Creating table 'Documents'
+CREATE TABLE [dbo].[Documents] (
+    [Id] uniqueidentifier  NOT NULL,
+    [Name] nvarchar(100)  NOT NULL,
+    [Path] nvarchar(300)  NULL,
+    [Link] nvarchar(250)  NULL
+);
+GO
+
+-- Creating table 'Contents_News'
+CREATE TABLE [dbo].[Contents_News] (
+    [Date] datetime  NOT NULL,
+    [ContentId] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'Contents_Event'
+CREATE TABLE [dbo].[Contents_Event] (
+    [StartingDate] datetime  NOT NULL,
+    [EndingDate] datetime  NOT NULL,
+    [ContentId] uniqueidentifier  NOT NULL
+);
+GO
+
+-- Creating table 'DocumentContent'
+CREATE TABLE [dbo].[DocumentContent] (
+    [Document_Id] uniqueidentifier  NOT NULL,
+    [Content_ContentId] uniqueidentifier  NOT NULL
 );
 GO
 
@@ -51,9 +117,138 @@ ADD CONSTRAINT [PK_Contents]
     PRIMARY KEY CLUSTERED ([ContentId] ASC);
 GO
 
+-- Creating primary key on [Id] in table 'VideoSet'
+ALTER TABLE [dbo].[VideoSet]
+ADD CONSTRAINT [PK_VideoSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Albums'
+ALTER TABLE [dbo].[Albums]
+ADD CONSTRAINT [PK_Albums]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Photos'
+ALTER TABLE [dbo].[Photos]
+ADD CONSTRAINT [PK_Photos]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Documents'
+ALTER TABLE [dbo].[Documents]
+ADD CONSTRAINT [PK_Documents]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [ContentId] in table 'Contents_News'
+ALTER TABLE [dbo].[Contents_News]
+ADD CONSTRAINT [PK_Contents_News]
+    PRIMARY KEY CLUSTERED ([ContentId] ASC);
+GO
+
+-- Creating primary key on [ContentId] in table 'Contents_Event'
+ALTER TABLE [dbo].[Contents_Event]
+ADD CONSTRAINT [PK_Contents_Event]
+    PRIMARY KEY CLUSTERED ([ContentId] ASC);
+GO
+
+-- Creating primary key on [Document_Id], [Content_ContentId] in table 'DocumentContent'
+ALTER TABLE [dbo].[DocumentContent]
+ADD CONSTRAINT [PK_DocumentContent]
+    PRIMARY KEY CLUSTERED ([Document_Id], [Content_ContentId] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
+
+-- Creating foreign key on [AlbumId] in table 'Photos'
+ALTER TABLE [dbo].[Photos]
+ADD CONSTRAINT [FK_AlbumPhoto]
+    FOREIGN KEY ([AlbumId])
+    REFERENCES [dbo].[Albums]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AlbumPhoto'
+CREATE INDEX [IX_FK_AlbumPhoto]
+ON [dbo].[Photos]
+    ([AlbumId]);
+GO
+
+-- Creating foreign key on [AlbumId] in table 'Contents'
+ALTER TABLE [dbo].[Contents]
+ADD CONSTRAINT [FK_AlbumContent]
+    FOREIGN KEY ([AlbumId])
+    REFERENCES [dbo].[Albums]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AlbumContent'
+CREATE INDEX [IX_FK_AlbumContent]
+ON [dbo].[Contents]
+    ([AlbumId]);
+GO
+
+-- Creating foreign key on [Document_Id] in table 'DocumentContent'
+ALTER TABLE [dbo].[DocumentContent]
+ADD CONSTRAINT [FK_DocumentContent_Document]
+    FOREIGN KEY ([Document_Id])
+    REFERENCES [dbo].[Documents]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Content_ContentId] in table 'DocumentContent'
+ALTER TABLE [dbo].[DocumentContent]
+ADD CONSTRAINT [FK_DocumentContent_Content]
+    FOREIGN KEY ([Content_ContentId])
+    REFERENCES [dbo].[Contents]
+        ([ContentId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_DocumentContent_Content'
+CREATE INDEX [IX_FK_DocumentContent_Content]
+ON [dbo].[DocumentContent]
+    ([Content_ContentId]);
+GO
+
+-- Creating foreign key on [VideoId] in table 'Contents'
+ALTER TABLE [dbo].[Contents]
+ADD CONSTRAINT [FK_VideoContent]
+    FOREIGN KEY ([VideoId])
+    REFERENCES [dbo].[VideoSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_VideoContent'
+CREATE INDEX [IX_FK_VideoContent]
+ON [dbo].[Contents]
+    ([VideoId]);
+GO
+
+-- Creating foreign key on [ContentId] in table 'Contents_News'
+ALTER TABLE [dbo].[Contents_News]
+ADD CONSTRAINT [FK_News_inherits_Content]
+    FOREIGN KEY ([ContentId])
+    REFERENCES [dbo].[Contents]
+        ([ContentId])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ContentId] in table 'Contents_Event'
+ALTER TABLE [dbo].[Contents_Event]
+ADD CONSTRAINT [FK_Event_inherits_Content]
+    FOREIGN KEY ([ContentId])
+    REFERENCES [dbo].[Contents]
+        ([ContentId])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
 
 -- --------------------------------------------------
 -- Script has ended

@@ -12,27 +12,21 @@ namespace GECO.DomainClasses
     using System;
     using System.Collections.Generic;
     
-    public partial class Content: Entity
+    public partial class Album: Entity
     {
-        public Content()
+        public Album()
         {
-            this.Document = new HashSet<Document>();
+            this.Photo = new HashSet<Photo>();
+            this.Content = new HashSet<Content>();
             this.AuthInfo = new AuthInfo();
         }
     
-        public System.Guid ContentId { get; set; }
+        public System.Guid Id { get; set; }
         public string Name { get; set; }
-        public string ShortDescription { get; set; }
-        public string LongDescription { get; set; }
-        public string Text { get; set; }
-        public Nullable<System.Guid> AlbumId { get; set; }
-        public Nullable<System.Guid> VideoId { get; set; }
-        public string MapUrl { get; set; }
     
         public AuthInfo AuthInfo { get; set; }
     
-        public virtual Album Album { get; set; }
-        public virtual ICollection<Document> Document { get; set; }
-        public virtual Video Video { get; set; }
+        public virtual ICollection<Photo> Photo { get; set; }
+        public virtual ICollection<Content> Content { get; set; }
     }
 }

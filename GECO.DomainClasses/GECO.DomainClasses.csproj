@@ -40,21 +40,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Album.cs">
+      <DependentUpon>GecoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="AuthInfo.cs">
       <DependentUpon>GecoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Content.cs">
       <DependentUpon>GecoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Document.cs">
+      <DependentUpon>GecoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity.cs" />
+    <Compile Include="Event.cs">
+      <DependentUpon>GecoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GecoModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GecoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="IObjectState.cs" />
+    <Compile Include="News.cs">
+      <DependentUpon>GecoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ObjectState.cs" />
+    <Compile Include="Photo.cs">
+      <DependentUpon>GecoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Video.cs">
+      <DependentUpon>GecoModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="GecoModel.tt">

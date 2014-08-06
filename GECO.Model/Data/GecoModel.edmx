@@ -7,6 +7,41 @@
     <Schema Namespace="GecoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="GecoModelStoreContainer">
     <EntitySet Name="Contents" EntityType="GecoModel.Store.Contents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VideoSet" EntityType="GecoModel.Store.VideoSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Albums" EntityType="GecoModel.Store.Albums" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Photos" EntityType="GecoModel.Store.Photos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Documents" EntityType="GecoModel.Store.Documents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Contents_News" EntityType="GecoModel.Store.Contents_News" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Contents_Event" EntityType="GecoModel.Store.Contents_Event" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DocumentContent" EntityType="GecoModel.Store.DocumentContent" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="AlbumPhoto" Association="GecoModel.Store.AlbumPhoto">
+      <End Role="Album" EntitySet="Albums" />
+      <End Role="Photo" EntitySet="Photos" />
+    </AssociationSet>
+    <AssociationSet Name="AlbumContent" Association="GecoModel.Store.AlbumContent">
+      <End Role="Album" EntitySet="Albums" />
+      <End Role="Content" EntitySet="Contents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentContent_Document" Association="GecoModel.Store.FK_DocumentContent_Document">
+      <End Role="Document" EntitySet="Documents" />
+      <End Role="DocumentContent" EntitySet="DocumentContent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentContent_Content" Association="GecoModel.Store.FK_DocumentContent_Content">
+      <End Role="Content" EntitySet="Contents" />
+      <End Role="DocumentContent" EntitySet="DocumentContent" />
+    </AssociationSet>
+    <AssociationSet Name="VideoContent" Association="GecoModel.Store.VideoContent">
+      <End Role="Video" EntitySet="VideoSet" />
+      <End Role="Content" EntitySet="Contents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_News_inherits_Content" Association="GecoModel.Store.FK_News_inherits_Content">
+      <End Role="Content" EntitySet="Contents" />
+      <End Role="News" EntitySet="Contents_News" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Event_inherits_Content" Association="GecoModel.Store.FK_Event_inherits_Content">
+      <End Role="Content" EntitySet="Contents" />
+      <End Role="Event" EntitySet="Contents_Event" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Contents">
     <Key>
@@ -21,13 +56,185 @@
     <Property Name="ShortDescription" Type="nvarchar" Nullable="true" MaxLength="300" />
     <Property Name="LongDescription" Type="nvarchar" Nullable="true" MaxLength="500" />
     <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AlbumId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="VideoId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="MapUrl" Type="nvarchar" Nullable="true" MaxLength="100" />
   </EntityType>
+  <EntityType Name="VideoSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Url" Type="nvarchar" Nullable="true" MaxLength="150" />
+    <Property Name="EmbeddedCode" Type="nvarchar" Nullable="true" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Albums">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="AuthInfo_CreatedBy" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="AuthInfo_Created" Type="datetime" Nullable="false" />
+    <Property Name="AuthInfo_ModifiedBy" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="AuthInfo_Modified" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Photos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Path" Type="nvarchar" Nullable="false" MaxLength="300" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="300" />
+    <Property Name="AlbumId" Type="uniqueidentifier" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Documents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Path" Type="nvarchar" Nullable="true" MaxLength="300" />
+    <Property Name="Link" Type="nvarchar" Nullable="true" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Contents_News">
+    <Key>
+      <PropertyRef Name="ContentId" />
+    </Key>
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="ContentId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Contents_Event">
+    <Key>
+      <PropertyRef Name="ContentId" />
+    </Key>
+    <Property Name="StartingDate" Type="datetime" Nullable="false" />
+    <Property Name="EndingDate" Type="datetime" Nullable="false" />
+    <Property Name="ContentId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentContent">
+    <Key>
+      <PropertyRef Name="Document_Id" />
+      <PropertyRef Name="Content_ContentId" />
+    </Key>
+    <Property Name="Document_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Content_ContentId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <Association Name="AlbumPhoto">
+    <End Role="Album" Type="GecoModel.Store.Albums" Multiplicity="0..1" />
+    <End Role="Photo" Type="GecoModel.Store.Photos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Photo">
+        <PropertyRef Name="AlbumId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AlbumContent">
+    <End Role="Album" Type="GecoModel.Store.Albums" Multiplicity="0..1" />
+    <End Role="Content" Type="GecoModel.Store.Contents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Content">
+        <PropertyRef Name="AlbumId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="VideoContent">
+    <End Role="Video" Type="GecoModel.Store.VideoSet" Multiplicity="0..1" />
+    <End Role="Content" Type="GecoModel.Store.Contents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Video">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Content">
+        <PropertyRef Name="VideoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentContent_Document">
+    <End Role="Document" Type="GecoModel.Store.Documents" Multiplicity="1" />
+    <End Role="DocumentContent" Type="GecoModel.Store.DocumentContent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Document">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DocumentContent">
+        <PropertyRef Name="Document_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentContent_Content">
+    <End Role="DocumentContent" Type="GecoModel.Store.DocumentContent" Multiplicity="*" />
+    <End Role="Content" Type="GecoModel.Store.Contents" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Content">
+        <PropertyRef Name="ContentId" />
+      </Principal>
+      <Dependent Role="DocumentContent">
+        <PropertyRef Name="Content_ContentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_News_inherits_Content">
+    <End Role="Content" Type="GecoModel.Store.Contents" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="News" Type="GecoModel.Store.Contents_News" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Content">
+        <PropertyRef Name="ContentId" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="ContentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Event_inherits_Content">
+    <End Role="Content" Type="GecoModel.Store.Contents" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Event" Type="GecoModel.Store.Contents_Event" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Content">
+        <PropertyRef Name="ContentId" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="ContentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="GecoModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="GecoModelContainer" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Contents" EntityType="GecoModel.Content" />
+          <EntitySet Name="VideoSet" EntityType="GecoModel.Video" />
+          <EntitySet Name="Albums" EntityType="GecoModel.Album" />
+          <EntitySet Name="Photos" EntityType="GecoModel.Photo" />
+          <EntitySet Name="Documents" EntityType="GecoModel.Document" />
+          <AssociationSet Name="AlbumPhoto" Association="GecoModel.AlbumPhoto">
+            <End Role="Album" EntitySet="Albums" />
+            <End Role="Photo" EntitySet="Photos" />
+          </AssociationSet>
+          <AssociationSet Name="AlbumContent" Association="GecoModel.AlbumContent">
+            <End Role="Album" EntitySet="Albums" />
+            <End Role="Content" EntitySet="Contents" />
+          </AssociationSet>
+          <AssociationSet Name="DocumentContent" Association="GecoModel.DocumentContent">
+            <End Role="Document" EntitySet="Documents" />
+            <End Role="Content" EntitySet="Contents" />
+          </AssociationSet>
+          <AssociationSet Name="VideoContent" Association="GecoModel.VideoContent">
+            <End Role="Video" EntitySet="VideoSet" />
+            <End Role="Content" EntitySet="Contents" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Content">
           <Key>
@@ -39,6 +246,12 @@
           <Property Name="ShortDescription" Type="String" Nullable="true" MaxLength="300" />
           <Property Name="LongDescription" Type="String" Nullable="true" MaxLength="500" />
           <Property Name="Text" Type="String" Nullable="false" />
+          <NavigationProperty Name="Album" Relationship="GecoModel.AlbumContent" FromRole="Content" ToRole="Album" />
+          <Property Name="AlbumId" Type="Guid" Nullable="true" />
+          <NavigationProperty Name="Document" Relationship="GecoModel.DocumentContent" FromRole="Content" ToRole="Document" />
+          <NavigationProperty Name="Video" Relationship="GecoModel.VideoContent" FromRole="Content" ToRole="Video" />
+          <Property Name="VideoId" Type="Guid" Nullable="true" />
+          <Property Name="MapUrl" Type="String" Nullable="true" MaxLength="100" />
         </EntityType>
         <ComplexType Name="AuthInfo">
           <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="50" />
@@ -46,6 +259,92 @@
           <Property Type="String" Name="ModifiedBy" Nullable="false" MaxLength="50" />
           <Property Type="DateTime" Name="Modified" Nullable="false" />
         </ComplexType>
+        <EntityType Name="News" BaseType="GecoModel.Content">
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Video">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Url" Type="String" Nullable="true" MaxLength="150" />
+          <Property Name="EmbeddedCode" Type="String" Nullable="true" MaxLength="500" />
+          <NavigationProperty Name="Content" Relationship="GecoModel.VideoContent" FromRole="Video" ToRole="Content" />
+        </EntityType>
+        <EntityType Name="Event" BaseType="GecoModel.Content">
+          <Property Name="StartingDate" Type="DateTime" Nullable="false" />
+          <Property Name="EndingDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" />
+          <Property Name="AuthInfo" Type="GecoModel.AuthInfo" Nullable="false" />
+          <NavigationProperty Name="Photo" Relationship="GecoModel.AlbumPhoto" FromRole="Album" ToRole="Photo" />
+          <NavigationProperty Name="Content" Relationship="GecoModel.AlbumContent" FromRole="Album" ToRole="Content" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" />
+          <Property Name="Path" Type="String" Nullable="false" MaxLength="300" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="300" />
+          <Property Name="AlbumId" Type="Guid" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" />
+          <Property Name="Path" Type="String" Nullable="true" MaxLength="300" />
+          <Property Name="Link" Type="String" Nullable="true" MaxLength="250" />
+          <NavigationProperty Name="Content" Relationship="GecoModel.DocumentContent" FromRole="Document" ToRole="Content" />
+        </EntityType>
+        <Association Name="AlbumPhoto">
+          <End Type="GecoModel.Album" Role="Album" Multiplicity="0..1" />
+          <End Type="GecoModel.Photo" Role="Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AlbumContent">
+          <End Type="GecoModel.Album" Role="Album" Multiplicity="0..1" />
+          <End Type="GecoModel.Content" Role="Content" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Content">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DocumentContent">
+          <End Type="GecoModel.Document" Role="Document" Multiplicity="*" />
+          <End Type="GecoModel.Content" Role="Content" Multiplicity="*" />
+        </Association>
+        <Association Name="VideoContent">
+          <End Type="GecoModel.Video" Role="Video" Multiplicity="0..1" />
+          <End Type="GecoModel.Content" Role="Content" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Video">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Content">
+              <PropertyRef Name="VideoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -66,9 +365,77 @@
           <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
           <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
           <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+          <ScalarProperty Name="VideoId" ColumnName="VideoId" />
+          <ScalarProperty Name="MapUrl" ColumnName="MapUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(GecoModel.News)">
+        <MappingFragment StoreEntitySet="Contents_News">
+          <ScalarProperty Name="ContentId" ColumnName="ContentId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(GecoModel.Event)">
+        <MappingFragment StoreEntitySet="Contents_Event">
+          <ScalarProperty Name="ContentId" ColumnName="ContentId" />
+          <ScalarProperty Name="StartingDate" ColumnName="StartingDate" />
+          <ScalarProperty Name="EndingDate" ColumnName="EndingDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="VideoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(GecoModel.Video)">
+        <MappingFragment StoreEntitySet="VideoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="EmbeddedCode" ColumnName="EmbeddedCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Albums">
+      <EntityTypeMapping TypeName="IsTypeOf(GecoModel.Album)">
+        <MappingFragment StoreEntitySet="Albums">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ComplexProperty Name="AuthInfo" TypeName="GecoModel.AuthInfo">
+            <ScalarProperty Name="CreatedBy" ColumnName="AuthInfo_CreatedBy" />
+            <ScalarProperty Name="Created" ColumnName="AuthInfo_Created" />
+            <ScalarProperty Name="ModifiedBy" ColumnName="AuthInfo_ModifiedBy" />
+            <ScalarProperty Name="Modified" ColumnName="AuthInfo_Modified" />
+          </ComplexProperty>
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Photos">
+      <EntityTypeMapping TypeName="IsTypeOf(GecoModel.Photo)">
+        <MappingFragment StoreEntitySet="Photos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Documents">
+      <EntityTypeMapping TypeName="IsTypeOf(GecoModel.Document)">
+        <MappingFragment StoreEntitySet="Documents">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="DocumentContent" TypeName="GecoModel.DocumentContent" StoreEntitySet="DocumentContent">
+      <EndProperty Name="Document">
+        <ScalarProperty Name="Id" ColumnName="Document_Id" />
+      </EndProperty>
+      <EndProperty Name="Content">
+        <ScalarProperty Name="ContentId" ColumnName="Content_ContentId" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
