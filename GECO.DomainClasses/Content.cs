@@ -12,7 +12,7 @@ namespace GECO.DomainClasses
     using System;
     using System.Collections.Generic;
     
-    public partial class Content: Entity
+    public partial class Content : Entity
     {
         public Content()
         {

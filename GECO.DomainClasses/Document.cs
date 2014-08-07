@@ -12,7 +12,7 @@ namespace GECO.DomainClasses
     using System;
     using System.Collections.Generic;
     
-    public partial class Document: Entity
+    public partial class Document : Entity
     {
         public Document()
         {

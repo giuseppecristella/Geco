@@ -12,7 +12,7 @@ namespace GECO.DomainClasses
     using System;
     using System.Collections.Generic;
     
-    public partial class Photo: Entity
+    public partial class Photo : Entity
     {
         public System.Guid Id { get; set; }
         public string Name { get; set; }

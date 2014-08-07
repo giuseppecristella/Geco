@@ -12,7 +12,7 @@ namespace GECO.DomainClasses
     using System;
     using System.Collections.Generic;
     
-    public partial class Video: Entity
+    public partial class Video : Entity
     {
         public Video()
         {

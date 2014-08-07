@@ -12,7 +12,7 @@ namespace GECO.DomainClasses
     using System;
     using System.Collections.Generic;
     
-    public partial class Event : Content: Entity
+    public partial class Event : Content
     {
         public System.DateTime StartingDate { get; set; }
         public System.DateTime EndingDate { get; set; }
