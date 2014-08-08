@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 08/06/2014 18:11:45
+-- Date Created: 08/08/2014 10:14:43
 -- Generated from EDMX file: D:\Progetti\GecoGit\GECO.Model\Data\GecoModel.edmx
 -- --------------------------------------------------
 
@@ -17,6 +17,27 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_AlbumPhoto]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Photos] DROP CONSTRAINT [FK_AlbumPhoto];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AlbumContent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Contents] DROP CONSTRAINT [FK_AlbumContent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DocumentContent_Document]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DocumentContent] DROP CONSTRAINT [FK_DocumentContent_Document];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DocumentContent_Content]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DocumentContent] DROP CONSTRAINT [FK_DocumentContent_Content];
+GO
+IF OBJECT_ID(N'[dbo].[FK_VideoContent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Contents] DROP CONSTRAINT [FK_VideoContent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_News_inherits_Content]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Contents_News] DROP CONSTRAINT [FK_News_inherits_Content];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Event_inherits_Content]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Contents_Event] DROP CONSTRAINT [FK_Event_inherits_Content];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -24,6 +45,27 @@ GO
 
 IF OBJECT_ID(N'[dbo].[Contents]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Contents];
+GO
+IF OBJECT_ID(N'[dbo].[VideoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[VideoSet];
+GO
+IF OBJECT_ID(N'[dbo].[Albums]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Albums];
+GO
+IF OBJECT_ID(N'[dbo].[Photos]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Photos];
+GO
+IF OBJECT_ID(N'[dbo].[Documents]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Documents];
+GO
+IF OBJECT_ID(N'[dbo].[Contents_News]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Contents_News];
+GO
+IF OBJECT_ID(N'[dbo].[Contents_Event]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Contents_Event];
+GO
+IF OBJECT_ID(N'[dbo].[DocumentContent]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DocumentContent];
 GO
 
 -- --------------------------------------------------
