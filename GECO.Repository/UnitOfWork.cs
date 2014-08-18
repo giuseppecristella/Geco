@@ -8,7 +8,7 @@ using GECO.Model.Data;
 
 namespace Repository
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly IDbContext _context;
 
@@ -49,7 +49,7 @@ namespace Repository
 
             if (!_repositories.ContainsKey(type))
             {
-                var repositoryType = typeof (Repository<>);
+                var repositoryType = typeof (EFRepository<>);
 
                 var repositoryInstance = 
                     Activator.CreateInstance(repositoryType

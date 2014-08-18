@@ -16,8 +16,8 @@ namespace GECO.DomainClasses
     {
         public Album()
         {
-            this.Photo = new HashSet<Photo>();
-            this.Content = new HashSet<Content>();
+            this.Contents = new HashSet<Content>();
+            this.Photos = new HashSet<Photo>();
             this.AuthInfo = new AuthInfo();
         }
     
@@ -26,7 +26,7 @@ namespace GECO.DomainClasses
     
         public AuthInfo AuthInfo { get; set; }
     
-        public virtual ICollection<Photo> Photo { get; set; }
-        public virtual ICollection<Content> Content { get; set; }
+        public virtual ICollection<Content> Contents { get; set; }
+        public virtual ICollection<Photo> Photos { get; set; }
     }
 }

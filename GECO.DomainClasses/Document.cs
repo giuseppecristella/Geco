@@ -16,14 +16,14 @@ namespace GECO.DomainClasses
     {
         public Document()
         {
-            this.Content = new HashSet<Content>();
+            this.Contents = new HashSet<Content>();
         }
     
         public System.Guid Id { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
-        public string Link { get; set; }
+        public string Description { get; set; }
     
-        public virtual ICollection<Content> Content { get; set; }
+        public virtual ICollection<Content> Contents { get; set; }
     }
 }

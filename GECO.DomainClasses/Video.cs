@@ -16,13 +16,15 @@ namespace GECO.DomainClasses
     {
         public Video()
         {
-            this.Content = new HashSet<Content>();
+            this.Contents = new HashSet<Content>();
         }
     
         public System.Guid Id { get; set; }
         public string Url { get; set; }
         public string EmbeddedCode { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     
-        public virtual ICollection<Content> Content { get; set; }
+        public virtual ICollection<Content> Contents { get; set; }
     }
 }

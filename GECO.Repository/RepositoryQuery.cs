@@ -10,14 +10,14 @@ namespace Repository
         private readonly List<Expression<Func<TEntity, object>>> 
             _includeProperties;
 
-        private readonly Repository<TEntity> _repository;
+        private readonly EFRepository<TEntity> _repository;
         private Expression<Func<TEntity, bool>> _filter;
         private Func<IQueryable<TEntity>, 
             IOrderedQueryable<TEntity>> _orderByQuerable;
         private int? _page;
         private int? _pageSize;
 
-        public RepositoryQuery(Repository<TEntity> repository)
+        public RepositoryQuery(EFRepository<TEntity> repository)
         {
             _repository = repository;
             _includeProperties = 
@@ -62,6 +62,13 @@ namespace Repository
             return _repository.Get(
                 _filter, 
                 _orderByQuerable, _includeProperties, _page, _pageSize);
+        }
+
+        public IQueryable<TEntity> All()
+        {
+          return _repository.All(
+              _filter,
+              _orderByQuerable, _includeProperties);
         }
     }
 }

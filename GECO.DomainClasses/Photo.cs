@@ -19,5 +19,7 @@ namespace GECO.DomainClasses
         public string Path { get; set; }
         public string Description { get; set; }
         public Nullable<System.Guid> AlbumId { get; set; }
+    
+        public virtual Album Album { get; set; }
     }
 }
