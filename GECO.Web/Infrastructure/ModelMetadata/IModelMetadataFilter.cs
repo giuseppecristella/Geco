@@ -8,4 +8,4 @@ namespace GECO.Web.Infrastructure.ModelMetadata
     void TransformMetadata(System.Web.Mvc.ModelMetadata metadata,
       IEnumerable<Attribute> attributes);
   }
-}
+} 
