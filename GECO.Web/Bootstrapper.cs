@@ -25,7 +25,7 @@ namespace GECO.Web
 
       // Override di DataAnnotationModelMetadata
       IModelMetadataFilter[] modelMetadataFilter = new IModelMetadataFilter[] 
-      {
+      {  
         new LabelConventionFilter(), 
         new TextAreaByNameFilter() 
       };

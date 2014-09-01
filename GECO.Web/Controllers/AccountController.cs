@@ -23,7 +23,7 @@ namespace GECO.Web.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager)
+        public AccountController(ApplicationUserManager userManager) 
         {
             UserManager = userManager;
         }
