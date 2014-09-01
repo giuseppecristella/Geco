@@ -28,7 +28,7 @@ namespace GECO.Web.Controllers
 
     public ActionResult Add()
     {
-      // Refactoring : Service layer, Automapping;
+      // Refactoring : Service layer, Automapping
       // TODO: verificare che venga eseguita la dispose della uow; scenario di update
       var query = _uow.Repository<News>().Query().All().FirstOrDefault();
       var model = new NewsViewModel();
