@@ -1,0 +1,20 @@
+﻿@model  GECO.Web.Models.NewsViewModel
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.LabelFor(m => m.Name)
+@Html.EditorFor(m => m.Name, new { @class = "form-control" })
+@Html.LabelFor(m => m.ShortDescription)
+@Html.TextBoxFor(m => m.ShortDescription, new { @class = "form-control" })
+@Html.LabelFor(m => m.ShortDescription)
+@Html.TextAreaFor(m => m.Text, new { @class = "form-control" })
+@Html.LabelFor(m => m.Album.Name)
+@Html.TextAreaFor(m => m.Album.Name, new { @class = "form-control" })
+
+@foreach (var item in Model.Album.Photos)
+{
+    @item.Name
+}

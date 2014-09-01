@@ -64,10 +64,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GECO.Data\GECO.Data.csproj">
-      <Project>{dfb19248-58b8-4c0f-9d87-98bdbc54267c}</Project>
-      <Name>GECO.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GECO.DomainClasses\GECO.DomainClasses.csproj">
       <Project>{fe52565c-c741-4457-835d-fbeddca76961}</Project>
       <Name>GECO.DomainClasses</Name>
