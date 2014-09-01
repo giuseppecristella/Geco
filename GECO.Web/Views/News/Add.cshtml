@@ -16,18 +16,21 @@
 @Html.EditorFor(m => m.Text)
 
 -------------------------------------------
-@Html.Action("PhotosWidget", "News")
+@*@Html.Action("PhotosWidget", "News")*@
 
 
-@*@Html.LabelFor(m => m.Name)
-    @Html.LabelFor(m => m.ShortDescription)
-    @Html.TextBoxFor(m => m.ShortDescription, new { @class = "form-control" })
-    @Html.LabelFor(m => m.ShortDescription)
-    @Html.TextAreaFor(m => m.Text, new { @class = "form-control" })
-    @Html.LabelFor(m => m.Album.Name)
-    @Html.TextAreaFor(m => m.Album.Name, new { @class = "form-control" })
+@Html.LabelFor(m => m.Name)
+@Html.LabelFor(m => m.ShortDescription)
+@Html.TextBoxFor(m => m.ShortDescription, new { @class = "form-control" })
+@Html.LabelFor(m => m.ShortDescription)
+@Html.TextAreaFor(m => m.Text, new { @class = "form-control" })
+@Html.LabelFor(m => m.Album.Name)
+@Html.TextAreaFor(m => m.Album.Name, new { @class = "form-control" })
 
-    @foreach (var item in Model.Album.Photos)
+@if (Model.Album.Photos != null)
+{
+    foreach (var item in Model.Album.Photos)
     {
         @item.Name
-    }*@
+    }
+}
