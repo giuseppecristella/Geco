@@ -6,6 +6,9 @@
 }
 
 namespace Geco.Dataset.DataSet1TableAdapters {
+  partial class NewsTableAdapter
+  {
+  }
     
     
     public partial class NewsEventiTableAdapter {
