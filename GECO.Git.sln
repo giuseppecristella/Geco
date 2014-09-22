@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GECO.Web", "GECO.Web\GECO.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GECO.Web.Tests", "GECO.Web.Tests\GECO.Web.Tests.csproj", "{4F72DA88-E75C-4832-A06E-5929BCD7E3D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geco.Dataset", "Geco.Dataset\Geco.Dataset.csproj", "{9C45A7BD-E0D2-483F-9D44-955BCCA4BF99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{4F72DA88-E75C-4832-A06E-5929BCD7E3D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F72DA88-E75C-4832-A06E-5929BCD7E3D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F72DA88-E75C-4832-A06E-5929BCD7E3D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C45A7BD-E0D2-483F-9D44-955BCCA4BF99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C45A7BD-E0D2-483F-9D44-955BCCA4BF99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C45A7BD-E0D2-483F-9D44-955BCCA4BF99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C45A7BD-E0D2-483F-9D44-955BCCA4BF99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

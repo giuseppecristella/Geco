@@ -45,6 +45,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -60,10 +63,15 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Builder Classes\NewsBuildercs.cs" />
-    <Compile Include="UnitTests\RepositoryTests.cs" />
+    <Compile Include="UnitTests\Repository.Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTests\RepositoryDataset.Test.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Geco.Dataset\Geco.Dataset.csproj">
+      <Project>{9c45a7bd-e0d2-483f-9d44-955bcca4bf99}</Project>
+      <Name>Geco.Dataset</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GECO.DomainClasses\GECO.DomainClasses.csproj">
       <Project>{fe52565c-c741-4457-835d-fbeddca76961}</Project>
       <Name>GECO.DomainClasses</Name>

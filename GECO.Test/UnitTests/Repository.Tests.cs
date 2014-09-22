@@ -128,6 +128,7 @@ namespace GECO.Test
 
     #region Helper methods
 
+    // Aggiungere un metodo di test specifico per testare fetching dati da db.
     private static void GetAndVerifySavedNews(UnitOfWork Uow, News expectedNews)
     {
       var actualNews = Uow.Repository<News>().Query()
